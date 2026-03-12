@@ -156,5 +156,123 @@
       { "type": "contains", "value": "Data Freshness Report" },
       { "type": "has_meta" }
     ]
+  },
+  {
+    "id": "get-dora-control",
+    "tool": "get_control",
+    "args": { "control_id": "dora:DORA-01" },
+    "assertions": [
+      { "type": "contains", "value": "IKT-Risikomanagement" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "get-nis2-control",
+    "tool": "get_control",
+    "args": { "control_id": "nis2umsucg:NIS2-01" },
+    "assertions": [
+      { "type": "contains", "value": "Einrichtungskategorien" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "get-vda-isa-extended-control",
+    "tool": "get_control",
+    "args": { "control_id": "vda-isa-extended:ISA-EXT-CV-01" },
+    "assertions": [
+      { "type": "contains", "value": "UNECE R155" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "get-ics-extended-control",
+    "tool": "get_control",
+    "args": { "control_id": "bsi-ics-extended:ICS-EXT-ZC-01" },
+    "assertions": [
+      { "type": "contains", "value": "IEC 62443" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "get-ttdsg-control",
+    "tool": "get_control",
+    "args": { "control_id": "ttdsg:TTDSG-01" },
+    "assertions": [
+      { "type": "contains", "value": "Fernmeldegeheimnis" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "get-dsk-sdm-control",
+    "tool": "get_control",
+    "args": { "control_id": "dsk-sdm:SDM-DM-01" },
+    "assertions": [
+      { "type": "contains", "value": "Datenminimierung" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "get-mindeststandards-control",
+    "tool": "get_control",
+    "args": { "control_id": "bsi-mindeststandards:MS-TLS-01" },
+    "assertions": [
+      { "type": "contains", "value": "TLS" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "sector-automotive",
+    "tool": "search_by_sector",
+    "args": { "sector": "automotive" },
+    "assertions": [
+      { "type": "contains", "value": "vda-isa" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "sector-finance",
+    "tool": "search_by_sector",
+    "args": { "sector": "finance" },
+    "assertions": [
+      { "type": "contains", "value": "dora" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "compare-dora-bafin",
+    "tool": "compare_controls",
+    "args": { "query": "Risikomanagement", "framework_ids": ["dora", "bafin-xait"] },
+    "assertions": [
+      { "type": "contains", "value": "dora" },
+      { "type": "contains", "value": "bafin-xait" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "search-post-quantum",
+    "tool": "search_controls",
+    "args": { "query": "post-quantum cryptography" },
+    "assertions": [
+      { "type": "contains", "value": "bsi-tr-extended-2" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "list-dora-controls",
+    "tool": "list_controls",
+    "args": { "framework_id": "dora" },
+    "assertions": [
+      { "type": "contains", "value": "DORA-01" },
+      { "type": "has_meta" }
+    ]
+  },
+  {
+    "id": "get-framework-dora",
+    "tool": "get_framework",
+    "args": { "framework_id": "dora" },
+    "assertions": [
+      { "type": "contains", "value": "DORA" },
+      { "type": "has_meta" }
+    ]
   }
 ]

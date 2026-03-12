@@ -134,3 +134,333 @@ sources:
     languages:
       - "de"
       - "en"
+
+  - name: "BSI IT-Grundschutz Kompendium (Extended Bausteine)"
+    authority: "BSI"
+    official_url: "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/IT-Grundschutz-Kompendium/it-grundschutz-kompendium_node.html"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF/HTML"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "Edition 2023"
+    effective_date: "2023-02-01"
+    license:
+      type: "Public sector publication"
+      url: "https://www.bsi.bund.de/DE/Service-Navi/Impressum/impressum_node.html"
+      summary: "Public sector guidance from BSI -- free to reference"
+    coverage:
+      scope: "Extended Bausteine: CON, OPS, DER, APP, SYS, NET, INF, IND, ORP"
+      version: "Edition 2023"
+      item_count: 80
+    languages:
+      - "de"
+      - "en"
+
+  - name: "BSI Technische Richtlinien (Erweitert)"
+    authority: "BSI"
+    official_url: "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/technische-richtlinien_node.html"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2024"
+    effective_date: "2024-01-01"
+    license:
+      type: "Public sector publication"
+      url: "https://www.bsi.bund.de/DE/Service-Navi/Impressum/impressum_node.html"
+      summary: "Public sector guidance from BSI -- free to reference"
+    coverage:
+      scope: "TR-02102-3/4, TR-03116-1/4, TR-03161, TR-03183, TR-03184, TR-03125"
+      version: "Various (2024)"
+      item_count: 16
+    languages:
+      - "de"
+      - "en"
+
+  - name: "BSI Mindeststandards fuer die Bundesverwaltung"
+    authority: "BSI"
+    official_url: "https://www.bsi.bund.de/DE/Themen/Oeffentliche-Verwaltung/Mindeststandards/mindeststandards_node.html"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2024"
+    effective_date: "2024-01-01"
+    license:
+      type: "Public sector publication"
+      url: "https://www.bsi.bund.de/DE/Service-Navi/Impressum/impressum_node.html"
+      summary: "Public sector guidance from BSI -- free to reference"
+    coverage:
+      scope: "Minimum standards for TLS, Browser, Webserver, MDM, Email, Logging"
+      version: "2024"
+      item_count: 16
+    languages:
+      - "de"
+      - "en"
+
+  - name: "NIS2-Umsetzungs- und Cybersicherheitsstarkungsgesetz (NIS2UmsuCG)"
+    authority: "BMI"
+    official_url: "https://www.bsi.bund.de/DE/Themen/KRITIS-und-regulierte-Unternehmen/NIS-2-Umsetzung/nis-2-umsetzung_node.html"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF/HTML"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2024"
+    effective_date: "2024-10-17"
+    license:
+      type: "Federal legislation"
+      url: null
+      summary: "German federal law -- free to reference"
+    coverage:
+      scope: "Entity classification, risk management, incident reporting, management liability"
+      version: "2024"
+      item_count: 17
+    languages:
+      - "de"
+      - "en"
+
+  - name: "BaFin IT-Anforderungen (BAIT/VAIT/KAIT/ZAIT)"
+    authority: "BaFin"
+    official_url: "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Rundschreiben/2022/rs_2022_10_ba_BAIT.html"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2022"
+    effective_date: "2022-09-14"
+    license:
+      type: "Public sector publication"
+      url: null
+      summary: "BaFin regulatory guidance -- free to reference"
+    coverage:
+      scope: "IT requirements for banks, insurers, capital managers, payment providers"
+      version: "BAIT 2022"
+      item_count: 17
+    languages:
+      - "de"
+      - "en"
+
+  - name: "Healthcare IT Security (gematik / KBV / DKG)"
+    authority: "gematik/KBV/DKG"
+    official_url: "https://www.gematik.de/telematikinfrastruktur"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF/HTML"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2024"
+    effective_date: "2024-01-01"
+    license:
+      type: "Public sector publication"
+      url: null
+      summary: "Healthcare IT guidance -- free to reference"
+    coverage:
+      scope: "TI security, KBV medical practices, DKG hospital requirements"
+      version: "2024"
+      item_count: 14
+    languages:
+      - "de"
+      - "en"
+
+  - name: "VDA Information Security Assessment (TISAX)"
+    authority: "VDA"
+    official_url: "https://www.vda.de/de/themen/digitalisierung/daten/informationssicherheit"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "6.0 (2024)"
+    effective_date: "2024-01-01"
+    license:
+      type: "VDA copyright"
+      url: "https://www.vda.de"
+      summary: "VDA copyright -- control domain structure publicly available"
+    coverage:
+      scope: "Information security, prototype protection, and data protection for automotive"
+      version: "ISA 6.0"
+      item_count: 18
+    languages:
+      - "de"
+      - "en"
+
+  - name: "DSK Standard-Datenschutzmodell (SDM)"
+    authority: "DSK"
+    official_url: "https://www.datenschutz-mv.de/datenschutz/sdm/"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "3.0"
+    effective_date: "2022-11-01"
+    license:
+      type: "Public sector publication"
+      url: null
+      summary: "DSK guidance -- free to reference"
+    coverage:
+      scope: "Seven guarantee objectives and reference measures for GDPR implementation"
+      version: "SDM 3.0"
+      item_count: 10
+    languages:
+      - "de"
+      - "en"
+
+  - name: "BSI ICS-Security-Kompendium"
+    authority: "BSI"
+    official_url: "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Empfehlungen-nach-Angriffszielen/Industrielle-Steuerungs-und-Automatisierungssysteme/industrielle-steuerungs-und-automatisierungssysteme_node.html"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2024"
+    effective_date: "2024-01-01"
+    license:
+      type: "Public sector publication"
+      url: "https://www.bsi.bund.de/DE/Service-Navi/Impressum/impressum_node.html"
+      summary: "Public sector guidance from BSI -- free to reference"
+    coverage:
+      scope: "ICS/OT security: segmentation, access control, hardening, patch management, monitoring, IEC 62443, Industrie 4.0"
+      version: "2024"
+      item_count: 31
+    languages:
+      - "de"
+      - "en"
+
+  - name: "TTDSG (Telekommunikation-Telemedien-Datenschutz-Gesetz)"
+    authority: "BMJ"
+    official_url: "https://www.gesetze-im-internet.de/ttdsg/"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "HTML"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2021"
+    effective_date: "2021-12-01"
+    license:
+      type: "Federal legislation"
+      url: null
+      summary: "German federal law -- free to reference"
+    coverage:
+      scope: "Telecommunications and telemedia privacy: cookie consent, PIMS, traffic data, Fernmeldegeheimnis"
+      version: "2021"
+      item_count: 12
+    languages:
+      - "de"
+      - "en"
+
+  - name: "DORA (Digital Operational Resilience Act)"
+    authority: "EU/BaFin"
+    official_url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32022R2554"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF/HTML"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2025"
+    effective_date: "2025-01-17"
+    license:
+      type: "EU legislation"
+      url: null
+      summary: "EU regulation -- free to reference"
+    coverage:
+      scope: "Digital operational resilience for financial sector: ICT risk management, incident reporting, resilience testing, third-party risk, TLPT"
+      version: "2025"
+      item_count: 35
+    languages:
+      - "de"
+      - "en"
+
+  - name: "BSI B3S (Branchenspezifische Sicherheitsstandards)"
+    authority: "BSI"
+    official_url: "https://www.bsi.bund.de/DE/Themen/KRITIS-und-regulierte-Unternehmen/Kritische-Infrastrukturen/KRITIS-Sektorspezifisch/kritis-sektorspezifisch_node.html"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2024"
+    effective_date: "2024-01-01"
+    license:
+      type: "Public sector publication"
+      url: null
+      summary: "BSI-approved sector-specific security standards -- free to reference"
+    coverage:
+      scope: "Sector-specific security standards for KRITIS operators: energy, healthcare, transport, finance, telecom, food supply"
+      version: "2024"
+      item_count: 19
+    languages:
+      - "de"
+      - "en"
+
+  - name: "Onlinezugangsgesetz (OZG) Sicherheitsanforderungen"
+    authority: "BMI/FITKO"
+    official_url: "https://www.onlinezugangsgesetz.de/"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF/HTML"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "OZG 2.0 (2024)"
+    effective_date: "2024-01-01"
+    license:
+      type: "Federal legislation"
+      url: null
+      summary: "German federal law -- free to reference"
+    coverage:
+      scope: "Security requirements for online government services: identity management, encryption, penetration testing, register modernization"
+      version: "OZG 2.0"
+      item_count: 11
+    languages:
+      - "de"
+      - "en"
+
+  - name: "BSI IT-Grundschutz Profile (Kommunal, Gesundheit, Wasser)"
+    authority: "BSI"
+    official_url: "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/IT-Grundschutz-Profile/Profile/profile_node.html"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2024"
+    effective_date: "2024-01-01"
+    license:
+      type: "Public sector publication"
+      url: "https://www.bsi.bund.de/DE/Service-Navi/Impressum/impressum_node.html"
+      summary: "Public sector guidance from BSI -- free to reference"
+    coverage:
+      scope: "Sector profiles for local government, healthcare, and water supply"
+      version: "2024"
+      item_count: 16
+    languages:
+      - "de"
+      - "en"
+
+  - name: "Datenschutz Extended (BDSG, TOM, DSK, VDA ISA Datenschutz)"
+    authority: "BfDI/DSK/VDA"
+    official_url: "https://www.bfdi.bund.de"
+    api_url: null
+    retrieval_method: "BULK_DOWNLOAD"
+    format: "PDF/HTML"
+    authentication: "none"
+    update_frequency: "annual"
+    version: "2024"
+    effective_date: "2024-01-01"
+    license:
+      type: "Public sector publication"
+      url: null
+      summary: "Data protection guidance -- free to reference"
+    coverage:
+      scope: "Extended data protection: TOM details, BDSG requirements, DSK guidance, SDM extended, VDA ISA data protection"
+      version: "2024"
+      item_count: 25
+    languages:
+      - "de"
+      - "en"

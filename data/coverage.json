@@ -1,109 +1,288 @@
 {
-  "schema_version": "1.0",
-  "mcp_name": "German Standards MCP",
-  "mcp_type": "domain_intelligence",
-  "coverage_date": "2026-03-12",
-  "database_version": "1.0.0",
+  "mcp_name": "german-standards-mcp",
+  "generated_at": "2026-03-12T10:46:05Z",
+  "summary": {
+    "frameworks": 33,
+    "controls": 800,
+    "tools": 11
+  },
   "sources": [
     {
-      "id": "bsi-grundschutz",
-      "name": "BSI IT-Grundschutz Kompendium",
-      "authority": "BSI",
-      "url": "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/IT-Grundschutz-Kompendium/it-grundschutz-kompendium_node.html",
-      "version": "Edition 2023",
-      "item_count": 58,
-      "item_type": "control",
-      "last_refresh": "2026-03-12",
-      "refresh_frequency": "annual",
-      "completeness": "partial",
-      "completeness_note": "Key Bausteine from process and system layers. Full compendium has ~1500 requirements."
+      "id": "bafin-xait",
+      "name": "BaFin IT-Anforderungen (BAIT/VAIT/KAIT/ZAIT)",
+      "item_count": 17,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bafin-xait",
+      "name": "BaFin IT-Anforderungen (BAIT/VAIT/KAIT/ZAIT)",
+      "item_count": 14,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bafin-xait",
+      "name": "BaFin IT-Anforderungen (BAIT/VAIT/KAIT/ZAIT)",
+      "item_count": 17,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bafin-xait",
+      "name": "BaFin IT-Anforderungen (BAIT/VAIT/KAIT/ZAIT)",
+      "item_count": 18,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bfdi-tom",
+      "name": "Datenschutz Extended (BDSG, TOM, DSK, VDA ISA Datenschutz)",
+      "item_count": 20,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bfdi-tom",
+      "name": "Datenschutz Extended (BDSG, TOM, DSK, VDA ISA Datenschutz)",
+      "item_count": 25,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
     },
     {
       "id": "bsi-c5",
       "name": "BSI C5 Cloud Computing Compliance Criteria Catalogue",
-      "authority": "BSI",
-      "url": "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Empfehlungen-nach-Angriffszielen/Cloud-Computing/Kriterienkatalog-C5/kriterienkatalog-c5_node.html",
-      "version": "2020",
       "item_count": 46,
-      "item_type": "control",
-      "last_refresh": "2026-03-12",
-      "refresh_frequency": "annual",
-      "completeness": "partial",
-      "completeness_note": "Key controls from all 17 domains. Full catalogue has ~121 controls."
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
     },
     {
-      "id": "bsi-tr",
-      "name": "BSI Technische Richtlinien",
-      "authority": "BSI",
-      "url": "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/technische-richtlinien_node.html",
-      "version": "2023",
-      "item_count": 13,
-      "item_type": "control",
-      "last_refresh": "2026-03-12",
-      "refresh_frequency": "annual",
-      "completeness": "partial",
-      "completeness_note": "Key requirements from TR-02102, TR-03116, TR-03107, TR-03138, TR-03148"
+      "id": "bsi-c5",
+      "name": "BSI C5 Cloud Computing Compliance Criteria Catalogue",
+      "item_count": 23,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-grundschutz",
+      "name": "BSI IT-Grundschutz Kompendium",
+      "item_count": 58,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-grundschutz",
+      "name": "BSI IT-Grundschutz Kompendium",
+      "item_count": 16,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-grundschutz-extended",
+      "name": "BSI IT-Grundschutz Kompendium (Extended Bausteine)",
+      "item_count": 81,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-grundschutz-extended",
+      "name": "BSI IT-Grundschutz Kompendium (Extended Bausteine)",
+      "item_count": 107,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-grundschutz-extended",
+      "name": "BSI IT-Grundschutz Kompendium (Extended Bausteine)",
+      "item_count": 40,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-ics",
+      "name": "BSI ICS-Security-Kompendium",
+      "item_count": 10,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-ics",
+      "name": "BSI ICS-Security-Kompendium",
+      "item_count": 21,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
     },
     {
       "id": "bsi-kritis",
       "name": "KRITIS Requirements (IT-Sicherheitsgesetz 2.0)",
-      "authority": "BSI",
-      "url": "https://www.bsi.bund.de/DE/Themen/KRITIS-und-regulierte-Unternehmen/Kritische-Infrastrukturen/kritis_node.html",
-      "version": "IT-SiG 2.0 (2021)",
       "item_count": 15,
-      "item_type": "control",
-      "last_refresh": "2026-03-12",
-      "refresh_frequency": "annual",
-      "completeness": "full",
-      "completeness_note": "Core KRITIS requirements including reporting obligations and attack detection"
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-kritis",
+      "name": "KRITIS Requirements (IT-Sicherheitsgesetz 2.0)",
+      "item_count": 12,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-kritis",
+      "name": "KRITIS Requirements (IT-Sicherheitsgesetz 2.0)",
+      "item_count": 19,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-mindeststandards",
+      "name": "BSI Mindeststandards fuer die Bundesverwaltung",
+      "item_count": 15,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-mindeststandards",
+      "name": "BSI Mindeststandards fuer die Bundesverwaltung",
+      "item_count": 25,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-mindeststandards",
+      "name": "BSI Mindeststandards fuer die Bundesverwaltung",
+      "item_count": 11,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-tr",
+      "name": "BSI Technische Richtlinien",
+      "item_count": 13,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-tr-extended",
+      "name": "BSI Technische Richtlinien (Erweitert)",
+      "item_count": 13,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "bsi-tr-extended",
+      "name": "BSI Technische Richtlinien (Erweitert)",
+      "item_count": 23,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "dsk-sdm",
+      "name": "DSK Standard-Datenschutzmodell (SDM)",
+      "item_count": 10,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "gematik",
+      "name": "Healthcare IT Security (gematik / KBV / DKG)",
+      "item_count": 12,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "gematik",
+      "name": "Healthcare IT Security (gematik / KBV / DKG)",
+      "item_count": 14,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
     },
     {
       "id": "grundschutz-bund",
-      "name": "IT-Grundschutz Profil Bundesbehoerden",
-      "authority": "BSI",
-      "url": "https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/IT-Grundschutz-Profile/Profile/Bund/bund_node.html",
-      "version": "2023",
+      "name": "BSI IT-Grundschutz Profile (Kommunal, Gesundheit, Wasser)",
       "item_count": 15,
-      "item_type": "control",
-      "last_refresh": "2026-03-12",
-      "refresh_frequency": "annual",
-      "completeness": "partial",
-      "completeness_note": "Prioritized requirements for federal agencies"
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
     },
     {
-      "id": "bfdi-tom",
-      "name": "BfDI Technisch-Organisatorische Massnahmen (DSGVO Art. 32)",
-      "authority": "BfDI",
-      "url": "https://www.bfdi.bund.de/DE/Datenschutz/datenschutz_node.html",
-      "version": "2023",
-      "item_count": 20,
-      "item_type": "control",
-      "last_refresh": "2026-03-12",
-      "refresh_frequency": "annual",
-      "completeness": "full",
-      "completeness_note": "All eight TOM categories plus pseudonymization, resilience, and review requirements"
+      "id": "nis2umsucg",
+      "name": "NIS2-Umsetzungs- und Cybersicherheitsstarkungsgesetz (NIS2UmsuCG)",
+      "item_count": 17,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "nis2umsucg",
+      "name": "NIS2-Umsetzungs- und Cybersicherheitsstarkungsgesetz (NIS2UmsuCG)",
+      "item_count": 14,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "nis2umsucg",
+      "name": "NIS2-Umsetzungs- und Cybersicherheitsstarkungsgesetz (NIS2UmsuCG)",
+      "item_count": 12,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "vda-isa",
+      "name": "VDA Information Security Assessment (TISAX)",
+      "item_count": 17,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
+    },
+    {
+      "id": "vda-isa",
+      "name": "VDA Information Security Assessment (TISAX)",
+      "item_count": 30,
+      "last_checked": "2026-03-12",
+      "update_frequency": "annual",
+      "next_check_due": "2027-03-12"
     }
   ],
-  "gaps": [],
   "tools": [
-    { "name": "search_controls", "category": "search", "description": "Full-text search across all controls in German and English", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "get_control", "category": "lookup", "description": "Retrieve a specific control by framework-prefixed ID", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "list_controls", "category": "lookup", "description": "List all controls for a given framework with optional category filter", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "list_frameworks", "category": "lookup", "description": "List all available frameworks with control counts", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "get_framework", "category": "lookup", "description": "Get detailed information about a specific framework", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "get_iso_mapping", "category": "analysis", "description": "Find German controls mapped to a specific ISO 27001/27002 control", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "compare_controls", "category": "analysis", "description": "Compare controls between frameworks side by side", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "search_by_sector", "category": "search", "description": "Find controls relevant to a specific sector", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "about", "category": "meta", "description": "Server metadata, stats, data sources, and disclaimer", "data_sources": [], "verified": true },
-    { "name": "check_data_freshness", "category": "meta", "description": "Per-source data age report with staleness flags", "data_sources": ["bsi-grundschutz", "bsi-c5", "bsi-tr", "bsi-kritis", "grundschutz-bund", "bfdi-tom"], "verified": true },
-    { "name": "list_sources", "category": "meta", "description": "Data provenance and licensing information for all sources", "data_sources": [], "verified": true }
-  ],
-  "summary": {
-    "total_tools": 11,
-    "total_sources": 6,
-    "total_items": 167,
-    "db_size_mb": 0.23,
-    "known_gaps": 0,
-    "gaps_planned": 0
-  }
+    "about",
+    "check_data_freshness",
+    "compare_controls",
+    "get_control",
+    "get_framework",
+    "get_iso_mapping",
+    "list_controls",
+    "list_frameworks",
+    "list_sources",
+    "search_by_sector",
+    "search_controls"
+  ]
 }

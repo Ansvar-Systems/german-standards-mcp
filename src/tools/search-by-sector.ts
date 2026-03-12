@@ -13,6 +13,8 @@ const ALLOWED_SECTORS = new Set([
   'water',
   'digital_infrastructure',
   'cloud',
+  'automotive',
+  'manufacturing',
   'all',
 ]);
 

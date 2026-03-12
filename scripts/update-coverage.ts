@@ -27,11 +27,38 @@ const SOURCES_YML = join(PROJECT_ROOT, 'sources.yml');
 // Map from framework DB id -> source id used in coverage.json
 const FRAMEWORK_TO_SOURCE: Record<string, string> = {
   'bsi-grundschutz': 'bsi-grundschutz',
+  'bsi-grundschutz-extended': 'bsi-grundschutz-extended',
+  'bsi-grundschutz-extended-2': 'bsi-grundschutz-extended',
+  'bsi-grundschutz-extended-3': 'bsi-grundschutz-extended',
+  'grundschutz-profile': 'bsi-grundschutz',
   'bsi-c5': 'bsi-c5',
+  'bsi-c5-extended': 'bsi-c5',
   'bsi-tr': 'bsi-tr',
+  'bsi-tr-extended': 'bsi-tr-extended',
+  'bsi-tr-extended-2': 'bsi-tr-extended',
   'bsi-kritis': 'bsi-kritis',
+  'bsi-kritis-extended': 'bsi-kritis',
   'grundschutz-bund': 'grundschutz-bund',
   'bfdi-tom': 'bfdi-tom',
+  'bsi-mindeststandards': 'bsi-mindeststandards',
+  'bsi-mindeststandards-extended': 'bsi-mindeststandards',
+  'nis2umsucg': 'nis2umsucg',
+  'nis2-extended': 'nis2umsucg',
+  'bafin-xait': 'bafin-xait',
+  'bafin-extended': 'bafin-xait',
+  'gematik': 'gematik',
+  'gematik-extended': 'gematik',
+  'vda-isa': 'vda-isa',
+  'vda-isa-extended': 'vda-isa',
+  'dsk-sdm': 'dsk-sdm',
+  'bsi-ics': 'bsi-ics',
+  'bsi-ics-extended': 'bsi-ics',
+  'datenschutz-extended': 'bfdi-tom',
+  'ttdsg': 'nis2umsucg',
+  'dora': 'bafin-xait',
+  'dora-extended': 'bafin-xait',
+  'bsi-b3s': 'bsi-kritis',
+  'ozg': 'bsi-mindeststandards',
 };
 
 // Canonical source metadata -- derived from sources.yml
@@ -62,12 +89,21 @@ function parseSourcesYml(content: string): SourceMeta[] {
 
     // Determine source id from name
     let id = 'unknown';
-    if (fullName.includes('IT-Grundschutz Kompendium')) id = 'bsi-grundschutz';
+    if (fullName.includes('IT-Grundschutz Kompendium (Extended') || fullName.includes('Erweiterte Bausteine')) id = 'bsi-grundschutz-extended';
+    else if (fullName.includes('IT-Grundschutz Kompendium') || fullName.includes('IT-Grundschutz Compendium')) id = 'bsi-grundschutz';
     else if (fullName.includes('C5')) id = 'bsi-c5';
-    else if (fullName.includes('Technische Richtlinien')) id = 'bsi-tr';
+    else if (fullName.includes('Technical Guidelines (Extended') || fullName.includes('Technische Richtlinien (Erweitert')) id = 'bsi-tr-extended';
+    else if (fullName.includes('Technische Richtlinien') || fullName.includes('Technical Guidelines')) id = 'bsi-tr';
     else if (fullName.includes('KRITIS')) id = 'bsi-kritis';
     else if (fullName.includes('Bundesbehoerden') || fullName.includes('Profil')) id = 'grundschutz-bund';
     else if (fullName.includes('BfDI') || fullName.includes('TOM')) id = 'bfdi-tom';
+    else if (fullName.includes('Mindeststandards')) id = 'bsi-mindeststandards';
+    else if (fullName.includes('NIS2')) id = 'nis2umsucg';
+    else if (fullName.includes('BaFin') || fullName.includes('BAIT')) id = 'bafin-xait';
+    else if (fullName.includes('gematik') || fullName.includes('Healthcare IT')) id = 'gematik';
+    else if (fullName.includes('VDA') || fullName.includes('TISAX')) id = 'vda-isa';
+    else if (fullName.includes('SDM') || fullName.includes('Standard-Datenschutzmodell')) id = 'dsk-sdm';
+    else if (fullName.includes('ICS Security') || fullName.includes('ICS-Security')) id = 'bsi-ics';
 
     sources.push({ id, name: fullName, update_frequency: freq, source_type: srcType });
   }

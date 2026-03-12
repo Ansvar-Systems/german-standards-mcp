@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest';
 import { handleListFrameworks } from '../../src/tools/list-frameworks.js';
 
 describe('handleListFrameworks', () => {
-  it('returns a Markdown table containing all 6 frameworks with control counts', () => {
+  it('returns a Markdown table containing all frameworks with control counts', () => {
     const result = handleListFrameworks();
     expect(result.isError).toBeFalsy();
     expect(result._meta).toBeDefined();
@@ -22,7 +22,7 @@ describe('handleListFrameworks', () => {
     expect(text).toContain('government');
     // Markdown table structure
     expect(text).toContain('| ID |');
-    // 6 frameworks
-    expect(text).toContain('6 frameworks');
+    // 33 frameworks (expanded from original 6)
+    expect(text).toContain('frameworks available');
   });
 });

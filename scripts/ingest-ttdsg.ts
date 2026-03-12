@@ -1,0 +1,62 @@
+// scripts/ingest-ttdsg.ts
+// Ingests TTDSG (Telekommunikation-Telemedien-Datenschutz-Gesetz) requirements.
+// Replaced TKG-TDDSG provisions on 01.12.2021.
+
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DATA_DIR = join(__dirname, '..', 'data', 'extracted');
+const OUTPUT_FILE = join(DATA_DIR, 'ttdsg.json');
+
+const controls = [
+  // Vertraulichkeit der Kommunikation
+  { control_number: 'TTDSG-01', title_nl: 'Fernmeldegeheimnis (§3 TTDSG)', title: 'Telecommunications secrecy', description_nl: 'Der Inhalt der Telekommunikation und ihre naeheren Umstaende unterliegen dem Fernmeldegeheimnis. Diensteanbieter MUESSEN das Fernmeldegeheimnis wahren und duerfen sich Kenntnis vom Inhalt nur verschaffen, soweit dies fuer die Erbringung des Dienstes erforderlich ist.', description: 'The content of telecommunications and its detailed circumstances are subject to telecommunications secrecy. Service providers MUST maintain telecommunications secrecy and may only gain knowledge of content insofar as necessary for service provision.', category: 'Fernmeldegeheimnis', subcategory: 'Vertraulichkeit', level: 'Verpflichtend', iso_mapping: 'A.5.14', implementation_guidance: 'Technische und organisatorische Massnahmen zum Schutz des Fernmeldegeheimnisses implementieren.', verification_guidance: 'Schutzmassnahmen fuer das Fernmeldegeheimnis pruefen.', source_url: 'https://www.gesetze-im-internet.de/ttdsg/' },
+  { control_number: 'TTDSG-02', title_nl: 'Vertraulichkeit der Nutzungsdaten (§4 TTDSG)', title: 'Confidentiality of usage data', description_nl: 'Nutzungsdaten DUERFEN nur erhoben und verwendet werden, soweit dies erforderlich ist. Nach Beendigung des Nutzungsvorgangs MUESSEN die Daten unverzueglich geloescht werden, sofern keine Aufbewahrungspflicht besteht.', description: 'Usage data MAY only be collected and used insofar as necessary. After termination of the usage process, data MUST be deleted immediately unless a retention obligation exists.', category: 'Fernmeldegeheimnis', subcategory: 'Nutzungsdaten', level: 'Verpflichtend', iso_mapping: 'A.5.34', implementation_guidance: 'Datenminimierung bei Nutzungsdaten. Automatische Loeschung nach Nutzungsende.', verification_guidance: 'Nutzungsdatenerhebung und Loeschprozesse pruefen.', source_url: null },
+
+  // Cookie-Einwilligung / Endeinrichtungsschutz
+  { control_number: 'TTDSG-03', title_nl: 'Schutz der Privatsphaere bei Endeinrichtungen (§25 Abs.1 TTDSG)', title: 'Protection of privacy in terminal equipment', description_nl: 'Die Speicherung von Informationen in der Endeinrichtung des Endnutzers oder der Zugriff auf dort gespeicherte Informationen ist nur zulaessig, wenn der Endnutzer eine Einwilligung erteilt hat (Cookie-Consent).', description: 'Storing information on the end user terminal equipment or accessing information stored there is only permitted if the end user has given consent (cookie consent).', category: 'Endeinrichtungsschutz', subcategory: 'Cookie-Consent', level: 'Verpflichtend', iso_mapping: 'A.5.34', implementation_guidance: 'Cookie-Consent-Management implementieren. Granulare Einwilligungsoptionen. Opt-in vor Tracking.', verification_guidance: 'Cookie-Consent-Implementation und Einwilligungsverwaltung pruefen.', source_url: null },
+  { control_number: 'TTDSG-04', title_nl: 'Ausnahmen von der Einwilligungspflicht (§25 Abs.2 TTDSG)', title: 'Exceptions from consent requirement', description_nl: 'Die Einwilligung ist nicht erforderlich, wenn der Zugriff technisch erforderlich ist, damit der Diensteanbieter einen vom Nutzer ausdruecklich gewuenschten Dienst erbringen kann (technisch notwendige Cookies).', description: 'Consent is not required if access is technically necessary for the service provider to provide a service explicitly requested by the user (technically necessary cookies).', category: 'Endeinrichtungsschutz', subcategory: 'Cookie-Ausnahmen', level: 'Verpflichtend', iso_mapping: 'A.5.34', implementation_guidance: 'Technisch notwendige Cookies identifizieren und dokumentieren. Klare Abgrenzung von Tracking.', verification_guidance: 'Klassifizierung der Cookies auf Korrektheit pruefen.', source_url: null },
+  { control_number: 'TTDSG-05', title_nl: 'PIMS und anerkannte Dienste zur Einwilligungsverwaltung (§26 TTDSG)', title: 'PIMS and recognized consent management services', description_nl: 'Anerkannte Dienste zur Verwaltung von Einwilligungen (Personal Information Management Services, PIMS) KOENNEN als Nachweis der Einwilligung dienen. Diensteanbieter SOLLTEN PIMS-Einstellungen respektieren.', description: 'Recognized consent management services (Personal Information Management Services, PIMS) MAY serve as proof of consent. Service providers SHOULD respect PIMS settings.', category: 'Endeinrichtungsschutz', subcategory: 'PIMS', level: 'Empfohlen', iso_mapping: 'A.5.34', implementation_guidance: 'PIMS-Schnittstellen implementieren. Automatische Erkennung von Nutzer-Praeferenzen.', verification_guidance: 'PIMS-Unterstuetzung und Praeferenz-Erkennung pruefen.', source_url: null },
+
+  // Verkehrsdaten
+  { control_number: 'TTDSG-06', title_nl: 'Verarbeitung von Verkehrsdaten (§9 TTDSG)', title: 'Processing of traffic data', description_nl: 'Verkehrsdaten DUERFEN nur verarbeitet werden, soweit dies fuer die in §9 TTDSG genannten Zwecke erforderlich ist. Nach Beendigung der Verbindung MUESSEN die Daten unverzueglich geloescht werden.', description: 'Traffic data MAY only be processed insofar as necessary for the purposes listed in section 9 TTDSG. After termination of the connection, data MUST be deleted immediately.', category: 'Verkehrsdaten', subcategory: 'Datenverarbeitung', level: 'Verpflichtend', iso_mapping: 'A.5.34', implementation_guidance: 'Verkehrsdaten auf das Erforderliche beschraenken. Loeschfristen implementieren.', verification_guidance: 'Verkehrsdatenverarbeitung und Loeschfristen pruefen.', source_url: null },
+  { control_number: 'TTDSG-07', title_nl: 'Standortdaten (§13 TTDSG)', title: 'Location data', description_nl: 'Standortdaten DUERFEN nur mit Einwilligung des Nutzers verarbeitet werden. Der Nutzer MUSS ueber Art, Umfang und Dauer der Verarbeitung informiert werden und MUSS die Einwilligung jederzeit widerrufen koennen.', description: 'Location data MAY only be processed with the consent of the user. The user MUST be informed about the type, scope, and duration of processing and MUST be able to revoke consent at any time.', category: 'Verkehrsdaten', subcategory: 'Standortdaten', level: 'Verpflichtend', iso_mapping: 'A.5.34', implementation_guidance: 'Opt-in fuer Standortdaten. Widerrufsmöglichkeit. Transparente Information.', verification_guidance: 'Standortdaten-Einwilligung und Widerrufsmechanismus pruefen.', source_url: null },
+
+  // Bestandsdaten
+  { control_number: 'TTDSG-08', title_nl: 'Verarbeitung von Bestandsdaten (§14 TTDSG)', title: 'Processing of inventory data', description_nl: 'Bestandsdaten DUERFEN nur erhoben und verwendet werden, soweit dies fuer die Begruendung, inhaltliche Ausgestaltung, Aenderung oder Beendigung des Vertragsverhaeltnisses erforderlich ist.', description: 'Inventory data MAY only be collected and used insofar as necessary for establishing, structuring, modifying, or terminating the contractual relationship.', category: 'Bestandsdaten', subcategory: 'Vertragsdaten', level: 'Verpflichtend', iso_mapping: 'A.5.34', implementation_guidance: 'Bestandsdaten auf das vertraglich Erforderliche beschraenken. Dokumentation der Verarbeitungszwecke.', verification_guidance: 'Bestandsdatenverarbeitung und Zweckbindung pruefen.', source_url: null },
+
+  // Missbrauchserkennung
+  { control_number: 'TTDSG-09', title_nl: 'Erkennung und Abwehr von Stoerungen (§11 TTDSG)', title: 'Detection and prevention of disruptions', description_nl: 'Diensteanbieter DUERFEN Nutzungsdaten zum Erkennen und Abstellen von Stoerungen und Missbrauch verarbeiten. Die Verarbeitung MUSS auf das erforderliche Mass beschraenkt werden.', description: 'Service providers MAY process usage data for detecting and preventing disruptions and misuse. Processing MUST be limited to the necessary extent.', category: 'Missbrauchserkennung', subcategory: 'Stoerungserkennung', level: 'Verpflichtend', iso_mapping: 'A.8.16', implementation_guidance: 'Missbrauchserkennung implementieren. Verarbeitungsumfang dokumentieren und begrenzen.', verification_guidance: 'Missbrauchserkennungs-Verarbeitung und Verhaeltnismaessigkeit pruefen.', source_url: null },
+
+  // Technische Sicherungsmassnahmen
+  { control_number: 'TTDSG-10', title_nl: 'Technische Schutzmassnahmen (§19 TTDSG)', title: 'Technical protection measures', description_nl: 'Diensteanbieter MUESSEN angemessene technische Vorkehrungen zum Schutz des Fernmeldegeheimnisses und personenbezogener Daten treffen. Der Stand der Technik MUSS beruecksichtigt werden.', description: 'Service providers MUST take appropriate technical precautions to protect telecommunications secrecy and personal data. The state of the art MUST be considered.', category: 'Technische Sicherheit', subcategory: 'Schutzmassnahmen', level: 'Verpflichtend', iso_mapping: 'A.8.24', implementation_guidance: 'TLS fuer alle Verbindungen. Verschluesselung personenbezogener Daten. Zugangskontrolle.', verification_guidance: 'Technische Schutzmassnahmen gegen Stand der Technik pruefen.', source_url: null },
+  { control_number: 'TTDSG-11', title_nl: 'Information ueber Sicherheitsrisiken (§20 TTDSG)', title: 'Information about security risks', description_nl: 'Diensteanbieter MUESSEN Nutzer ueber besondere Risiken der Verletzung der Sicherheit informieren. Wenn ein besonderes Risiko besteht, MUSS der Nutzer auf Schutzmassnahmen hingewiesen werden.', description: 'Service providers MUST inform users about specific risks of security breaches. If a specific risk exists, the user MUST be advised of protective measures.', category: 'Technische Sicherheit', subcategory: 'Risikoinformation', level: 'Verpflichtend', iso_mapping: 'A.5.26', implementation_guidance: 'Risikokommunikationsprozess etablieren. Nutzer proaktiv informieren.', verification_guidance: 'Prozess fuer Sicherheitsrisiko-Information an Nutzer pruefen.', source_url: null },
+
+  // Bussgeldvorschriften
+  { control_number: 'TTDSG-12', title_nl: 'Bussgeldvorschriften und Durchsetzung (§28-29 TTDSG)', title: 'Penalty provisions and enforcement', description_nl: 'Verstoesse gegen TTDSG-Anforderungen koennen mit Bussgeldern von bis zu 300.000 EUR geahndet werden. Die zustaendige Aufsichtsbehoerde kann Massnahmen zur Durchsetzung anordnen.', description: 'Violations of TTDSG requirements can be penalized with fines up to EUR 300,000. The competent supervisory authority can order enforcement measures.', category: 'Durchsetzung', subcategory: 'Bussgeldvorschriften', level: 'Verpflichtend', iso_mapping: 'A.5.31', implementation_guidance: 'Compliance-Prozess fuer TTDSG etablieren. Regelmaessige Pruefung der Konformitaet.', verification_guidance: 'TTDSG-Compliance-Status und offene Risiken pruefen.', source_url: null },
+];
+
+const output = {
+  framework: {
+    id: 'ttdsg',
+    name: 'Telecommunications-Telemedia Data Protection Act',
+    name_nl: 'Telekommunikation-Telemedien-Datenschutz-Gesetz (TTDSG)',
+    issuing_body: 'Bundesregierung / Bundesnetzagentur (BNetzA)',
+    version: '2021',
+    effective_date: '2021-12-01',
+    scope: 'Data protection requirements for telecommunications and telemedia services in Germany, including cookie consent (Section 25), telecommunications secrecy, and traffic/location data protection',
+    scope_sectors: ['telecom', 'digital_infrastructure', 'all'],
+    structure_description: 'Covers telecommunications secrecy (Fernmeldegeheimnis), terminal equipment privacy (cookie consent), traffic data, location data, inventory data, misuse detection, and technical security measures.',
+    source_url: 'https://www.gesetze-im-internet.de/ttdsg/',
+    license: 'Federal legislation',
+    language: 'de+en',
+  },
+  controls,
+  metadata: { ingested_at: new Date().toISOString(), total_controls: controls.length },
+};
+
+mkdirSync(DATA_DIR, { recursive: true });
+writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2), 'utf-8');
+console.log(`TTDSG: ${controls.length} controls written to ${OUTPUT_FILE}`);
