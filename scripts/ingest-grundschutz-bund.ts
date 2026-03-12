@@ -1,0 +1,67 @@
+// scripts/ingest-grundschutz-bund.ts
+// Ingests IT-Grundschutz Profil fuer Bundesbehoerden (federal government profile).
+// Prioritized subset of IT-Grundschutz requirements mandatory for all federal agencies.
+
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DATA_DIR = join(__dirname, '..', 'data', 'extracted');
+const OUTPUT_FILE = join(DATA_DIR, 'grundschutz-bund.json');
+
+const controls = [
+  // Pflicht-Bausteine fuer alle Bundesbehoerden
+  { control_number: 'BUND-ISMS-01', title_nl: 'ISMS in Bundesbehoerden', title: 'ISMS in federal agencies', description_nl: 'Jede Bundesbehoerde MUSS ein Informationssicherheitsmanagementsystem auf Basis des IT-Grundschutzes betreiben. Die Umsetzung MUSS durch den IT-Rat des Bundes geprueft werden.', description: 'Every federal agency MUST operate an ISMS based on IT-Grundschutz. Implementation MUST be reviewed by the Federal IT Council.', category: 'ISMS', subcategory: 'Managementsystem', level: 'Pflicht', iso_mapping: 'A.5.1', implementation_guidance: 'IT-Grundschutz nach BSI-Standard 200-2 umsetzen. Zertifizierung anstreben.', verification_guidance: 'IT-Grundschutz-Zertifikat oder Reifegradbestimmung pruefen.', source_url: 'https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/IT-Grundschutz-Profile/Profile/Bund/bund_node.html' },
+  { control_number: 'BUND-ISMS-02', title_nl: 'IT-Sicherheitsbeauftragter der Behoerde', title: 'IT security officer of the agency', description_nl: 'Jede Bundesbehoerde MUSS einen IT-Sicherheitsbeauftragten benennen, der direkt der Behoerdenleitung unterstellt ist.', description: 'Every federal agency MUST appoint an IT security officer who reports directly to agency leadership.', category: 'ISMS', subcategory: 'Organisation', level: 'Pflicht', iso_mapping: 'A.5.2', implementation_guidance: 'ISB mit Fachkompetenz, Weisungsbefugnis und direktem Berichtsweg benennen.', verification_guidance: 'Stellenbesetzung und organisatorische Einbindung des ISB pruefen.', source_url: null },
+  { control_number: 'BUND-ISMS-03', title_nl: 'Umsetzungsplan Bund', title: 'Federal implementation plan', description_nl: 'Jede Bundesbehoerde MUSS einen Umsetzungsplan fuer IT-Grundschutz erstellen und dem BSI vorlegen. Der Plan MUSS priorisierte Massnahmen und Zeitplaene enthalten.', description: 'Every federal agency MUST create an implementation plan for IT-Grundschutz and submit it to BSI. The plan MUST contain prioritized measures and timelines.', category: 'ISMS', subcategory: 'Planung', level: 'Pflicht', iso_mapping: 'A.5.1', implementation_guidance: 'Umsetzungsplan mit Meilensteinen und Verantwortlichen erstellen.', verification_guidance: 'Umsetzungsplan und Fortschrittsbericht an BSI pruefen.', source_url: null },
+
+  // Netzwerksicherheit Bund
+  { control_number: 'BUND-NET-01', title_nl: 'Anbindung an das NdB (Netze des Bundes)', title: 'Connection to NdB (federal networks)', description_nl: 'Bundesbehoerden MUESSEN ihre IT-Systeme ueber die Netze des Bundes (NdB) anbinden. Die Anbindung MUSS den Sicherheitsanforderungen der NdB-Architektur entsprechen.', description: 'Federal agencies MUST connect their IT systems via the federal networks (NdB). The connection MUST meet the security requirements of the NdB architecture.', category: 'Netzwerk', subcategory: 'Netze des Bundes', level: 'Pflicht', iso_mapping: 'A.8.20', implementation_guidance: 'NdB-Anbindung ueber vorgegebene Uebergabepunkte. Sicherheitsanforderungen der NdB-Betriebsfuehrung beachten.', verification_guidance: 'NdB-Anbindungskonfiguration und Konformitaet pruefen.', source_url: null },
+  { control_number: 'BUND-NET-02', title_nl: 'Netzsegmentierung in Bundesbehoerden', title: 'Network segmentation in federal agencies', description_nl: 'Das Behoerdennetz MUSS in Sicherheitszonen segmentiert werden. Uebergaenge zwischen Zonen MUESSEN durch Firewalls geschuetzt sein.', description: 'The agency network MUST be segmented into security zones. Transitions between zones MUST be protected by firewalls.', category: 'Netzwerk', subcategory: 'Segmentierung', level: 'Pflicht', iso_mapping: 'A.8.22', implementation_guidance: 'Zonenkonzept erstellen: Internet-DMZ, interne Zonen, VS-NfD-Zone. Firewalls zwischen Zonen.', verification_guidance: 'Zonenkonzept und Firewall-Regeln pruefen.', source_url: null },
+
+  // Endgeraete und Arbeitsplatz
+  { control_number: 'BUND-SYS-01', title_nl: 'Standard-Arbeitsplatzsystem', title: 'Standard workplace system', description_nl: 'Fuer Standard-Arbeitsplaetze MUSS eine gehaertete Standardkonfiguration eingesetzt werden. Diese MUSS zentral verwaltet und regelmaessig aktualisiert werden.', description: 'For standard workplaces, a hardened standard configuration MUST be used. This MUST be centrally managed and regularly updated.', category: 'Systeme', subcategory: 'Arbeitsplatz', level: 'Pflicht', iso_mapping: 'A.8.9', implementation_guidance: 'Standard-Image mit Haertung nach BSI SiSyPHuS. Zentrale Softwareverteilung und Patch-Management.', verification_guidance: 'Standard-Image-Konfiguration gegen Haertungsvorgaben pruefen.', source_url: null },
+  { control_number: 'BUND-SYS-02', title_nl: 'Mobile Endgeraete', title: 'Mobile devices', description_nl: 'Mobile Endgeraete MUESSEN durch ein Mobile Device Management (MDM) verwaltet werden. Verschluesselung, Fernloeschung und Zugangskontrolle MUESSEN aktiviert sein.', description: 'Mobile devices MUST be managed by a Mobile Device Management (MDM) system. Encryption, remote wipe, and access control MUST be activated.', category: 'Systeme', subcategory: 'Mobile Geraete', level: 'Pflicht', iso_mapping: 'A.8.1', implementation_guidance: 'MDM-Loesung einsetzen. Geraeteverschluesselung, App-Whitelisting und Remote-Wipe konfigurieren.', verification_guidance: 'MDM-Konfiguration und Geraete-Compliance-Rate pruefen.', source_url: null },
+
+  // Verschlusssachen
+  { control_number: 'BUND-VS-01', title_nl: 'Umgang mit VS-NfD-Informationen', title: 'Handling of VS-NfD information', description_nl: 'Fuer den Umgang mit Verschlusssachen des Grades VS-NfD MUESSEN die Vorgaben der VSA (Verschlusssachenanweisung) und die BSI-Vorgaben fuer VS-NfD-IT eingehalten werden.', description: 'For handling classified information (VS-NfD), the requirements of the VSA (Classified Information Instructions) and BSI specifications for VS-NfD IT MUST be followed.', category: 'Verschlusssachen', subcategory: 'VS-NfD', level: 'Pflicht', iso_mapping: 'A.5.12', implementation_guidance: 'VS-NfD-IT gemaess BSI-Vorgaben einrichten. Zugelassene Produkte (VS-NfD) verwenden.', verification_guidance: 'VS-NfD-Konfiguration und zugelassene Produkte pruefen.', source_url: null },
+  { control_number: 'BUND-VS-02', title_nl: 'Kryptographische Absicherung von VS', title: 'Cryptographic protection of classified information', description_nl: 'Verschlusssachen MUESSEN bei Uebertragung und Speicherung mit vom BSI zugelassenen kryptographischen Produkten geschuetzt werden.', description: 'Classified information MUST be protected during transmission and storage with cryptographic products approved by BSI.', category: 'Verschlusssachen', subcategory: 'Kryptographie', level: 'Pflicht', iso_mapping: 'A.8.24', implementation_guidance: 'Nur BSI-zugelassene Kryptoprodukte (VS-Zulassung) einsetzen.', verification_guidance: 'Zugelassene Kryptoprodukte und deren aktuelle Zulassung pruefen.', source_url: null },
+
+  // Identitaetsmanagement Bund
+  { control_number: 'BUND-IDM-01', title_nl: 'Verzeichnisdienst Bund', title: 'Federal directory service', description_nl: 'Bundesbehoerden MUESSEN den zentralen Verzeichnisdienst des Bundes nutzen oder einen kompatiblen Verzeichnisdienst betreiben.', description: 'Federal agencies MUST use the central federal directory service or operate a compatible directory service.', category: 'Identitaetsmanagement', subcategory: 'Verzeichnisdienst', level: 'Pflicht', iso_mapping: 'A.5.16', implementation_guidance: 'Active Directory oder kompatiblen LDAP-Dienst mit Anbindung an Bundesinfrastruktur betreiben.', verification_guidance: 'Verzeichnisdienstkonfiguration und Integration pruefen.', source_url: null },
+  { control_number: 'BUND-IDM-02', title_nl: 'Authentisierung mit Dienstausweis', title: 'Authentication with official ID card', description_nl: 'Fuer den Zugang zu IT-Systemen des Bundes SOLLTE die Authentisierung mit dem Dienstausweis (PKI-basiert) eingesetzt werden.', description: 'For access to federal IT systems, authentication with the official ID card (PKI-based) SHOULD be used.', category: 'Identitaetsmanagement', subcategory: 'Authentisierung', level: 'Empfohlen', iso_mapping: 'A.8.5', implementation_guidance: 'PKI-basierte Smartcard-Authentisierung fuer privilegierte Zugaenge einrichten.', verification_guidance: 'PKI-Einsatz und Smartcard-Abdeckung pruefen.', source_url: null },
+
+  // Cloud-Nutzung Bund
+  { control_number: 'BUND-CLOUD-01', title_nl: 'Cloud-Nutzung in Bundesbehoerden', title: 'Cloud usage in federal agencies', description_nl: 'Bundesbehoerden MUESSEN fuer die Cloud-Nutzung die Anforderungen des BSI C5 und des EVB-IT Cloud-Vertrags beachten. Nur C5-testierte Cloud-Dienste SOLLTEN eingesetzt werden.', description: 'Federal agencies MUST follow BSI C5 requirements and EVB-IT cloud contract terms for cloud usage. Only C5-attested cloud services SHOULD be used.', category: 'Cloud', subcategory: 'Cloud-Sicherheit', level: 'Pflicht', iso_mapping: 'A.5.23', implementation_guidance: 'Cloud-Dienste nur von C5-testierten Anbietern beziehen. Cloud-Sicherheitskonzept erstellen.', verification_guidance: 'C5-Testierung der genutzten Cloud-Dienste und Cloud-Sicherheitskonzept pruefen.', source_url: null },
+  { control_number: 'BUND-CLOUD-02', title_nl: 'Datensouveraenitaet', title: 'Data sovereignty', description_nl: 'Bei Cloud-Nutzung MUSS die Datensouveraenitaet sichergestellt sein. Daten MUESSEN in der EU oder dem EWR gespeichert werden, sofern keine ausdrueckliche Ausnahme vorliegt.', description: 'When using cloud services, data sovereignty MUST be ensured. Data MUST be stored in the EU or EEA unless an explicit exception exists.', category: 'Cloud', subcategory: 'Datensouveraenitaet', level: 'Pflicht', iso_mapping: 'A.5.31', implementation_guidance: 'Datenhaltung in EU/EWR vertraglich sicherstellen. Subunternehmer-Kette pruefen.', verification_guidance: 'Cloud-Vertraege auf Datenhaltungsort und Subunternehmer pruefen.', source_url: null },
+
+  // Notfallmanagement Bund
+  { control_number: 'BUND-BCM-01', title_nl: 'IT-Notfallmanagement nach BSI-Standard 200-4', title: 'IT emergency management per BSI Standard 200-4', description_nl: 'Bundesbehoerden MUESSEN ein IT-Notfallmanagement nach BSI-Standard 200-4 etablieren. Notfallplaene MUESSEN regelmaessig geuebt werden.', description: 'Federal agencies MUST establish IT emergency management per BSI Standard 200-4. Emergency plans MUST be regularly exercised.', category: 'Notfallmanagement', subcategory: 'BCM', level: 'Pflicht', iso_mapping: 'A.5.29', implementation_guidance: 'BSI-Standard 200-4 umsetzen. BIA durchfuehren. Jaehrliche Notfalluebungen.', verification_guidance: 'Notfallplaene und Uebungsprotokolle pruefen.', source_url: null },
+
+  // Sensibilisierung
+  { control_number: 'BUND-ORP-01', title_nl: 'Sensibilisierung der Beschaeftigten', title: 'Employee awareness', description_nl: 'Alle Beschaeftigten der Bundesbehoerde MUESSEN regelmaessig zu Informationssicherheit geschult werden. Neue Beschaeftigte MUESSEN vor Aufnahme der Taetigkeit eine Grundschulung erhalten.', description: 'All employees of the federal agency MUST be regularly trained in information security. New employees MUST receive basic training before starting work.', category: 'Personal', subcategory: 'Sensibilisierung', level: 'Pflicht', iso_mapping: 'A.6.3', implementation_guidance: 'Pflichtschulungen bei Eintritt und jaehrlich. Themen: Phishing, Social Engineering, Passwoerter, VS-NfD.', verification_guidance: 'Schulungsnachweise und Abdeckungsrate pruefen.', source_url: null },
+];
+
+const output = {
+  framework: {
+    id: 'grundschutz-bund',
+    name: 'IT-Grundschutz Profile for Federal Agencies',
+    name_nl: 'IT-Grundschutz Profil fuer Bundesbehoerden',
+    issuing_body: 'Bundesamt fuer Sicherheit in der Informationstechnik (BSI)',
+    version: '2023',
+    effective_date: '2023-01-01',
+    scope: 'Mandatory IT security requirements for all German federal government agencies (Bundesbehoerden)',
+    scope_sectors: ['government'],
+    structure_description: 'Prioritized subset of IT-Grundschutz requirements mandatory for federal agencies, including federal network integration, classified information handling, cloud security, and emergency management.',
+    source_url: 'https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/IT-Grundschutz-Profile/Profile/Bund/bund_node.html',
+    license: 'Public document',
+    language: 'de+en',
+  },
+  controls,
+  metadata: { ingested_at: new Date().toISOString(), total_controls: controls.length },
+};
+
+mkdirSync(DATA_DIR, { recursive: true });
+writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2), 'utf-8');
+console.log(`Grundschutz Bund: ${controls.length} controls written to ${OUTPUT_FILE}`);

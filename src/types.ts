@@ -60,6 +60,6 @@ export interface DbMetadata {
   database_version: string;
 }
 
-export type Language = 'nl' | 'en';
+export type Language = 'de' | 'en';
 
 export type ErrorType = 'NO_MATCH' | 'INVALID_INPUT';

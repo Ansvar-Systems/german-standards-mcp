@@ -1,6 +1,6 @@
-# CLAUDE.md - Dutch Standards MCP
+# CLAUDE.md - German Standards MCP
 
-MCP server for Dutch government cybersecurity standards.
+MCP server for German government cybersecurity standards.
 
 ## Build & Test
 
@@ -14,13 +14,23 @@ npm run test:contract # Golden contract tests
 
 ## Architecture
 
-- `src/tools/*.ts` — one file per tool, exports handler function
-- `src/db.ts` — SQLite connection singleton (WASM via @ansvar/mcp-sqlite)
-- `src/response-meta.ts` — shared _meta helper
-- `src/index.ts` — stdio entry point
-- `src/http-server.ts` — HTTP entry point with /health
-- `data/standards.db` — bundled SQLite (gitignored, built by scripts/build-db.ts)
-- `scripts/seed-test-db.ts` — creates minimal test DB
+- `src/tools/*.ts` -- one file per tool, exports handler function
+- `src/db.ts` -- SQLite connection singleton (WASM via @ansvar/mcp-sqlite)
+- `src/response-meta.ts` -- shared _meta helper
+- `src/index.ts` -- stdio entry point
+- `src/http-server.ts` -- HTTP entry point with /health
+- `data/standards.db` -- bundled SQLite (gitignored, built by scripts/build-db.ts)
+- `scripts/seed-test-db.ts` -- creates minimal test DB
+- `scripts/ingest-*.ts` -- ingestion scripts for each framework
+
+## Frameworks
+
+- `bsi-grundschutz` -- BSI IT-Grundschutz Kompendium (58 controls)
+- `bsi-c5` -- BSI C5 Cloud Computing Compliance Criteria (46 controls)
+- `bsi-tr` -- BSI Technische Richtlinien (13 controls)
+- `bsi-kritis` -- KRITIS Requirements / IT-SiG 2.0 (15 controls)
+- `grundschutz-bund` -- IT-Grundschutz Profil Bundesbehoerden (15 controls)
+- `bfdi-tom` -- BfDI TOM / DSGVO Art. 32 (20 controls)
 
 ## Anti-Slop
 

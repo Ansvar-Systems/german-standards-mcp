@@ -49,10 +49,10 @@ export function handleGetControl(args: { control_id?: string }) {
 
   const lines: string[] = [];
 
-  // Heading: control number + Dutch title
+  // Heading: control number + German title
   lines.push(`## ${row.control_number} — ${row.title_nl}`);
 
-  // English title if different from Dutch
+  // English title if different from German
   if (row.title && row.title !== row.title_nl) {
     lines.push(`*${row.title}*`);
   }
@@ -86,7 +86,7 @@ export function handleGetControl(args: { control_id?: string }) {
 
   // Bilingual descriptions
   if (row.description_nl) {
-    lines.push('### Beschrijving (NL)');
+    lines.push('### Beschreibung (DE)');
     lines.push(row.description_nl);
     lines.push('');
   }

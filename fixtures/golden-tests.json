@@ -1,64 +1,64 @@
 [
   {
-    "id": "get-bio2-control",
+    "id": "get-grundschutz-control",
     "tool": "get_control",
-    "args": { "control_id": "bio2:5.01.01" },
+    "args": { "control_id": "bsi-grundschutz:ISMS.1.A1" },
     "assertions": [
-      { "type": "contains", "value": "Policies for information security" },
+      { "type": "contains", "value": "Informationssicherheit" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "get-dnb-control",
+    "id": "get-c5-control",
     "tool": "get_control",
-    "args": { "control_id": "dnb-gpib-2023:GPIB-01" },
+    "args": { "control_id": "bsi-c5:OIS-01" },
     "assertions": [
-      { "type": "contains", "value": "Informatiebeveiligingsbeleid" },
+      { "type": "contains", "value": "Informationssicherheitsmanagementsystem" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "get-nen7510-control",
+    "id": "get-kritis-control",
     "tool": "get_control",
-    "args": { "control_id": "nen-7510-2017:12.4.1" },
+    "args": { "control_id": "bsi-kritis:KRITIS-04" },
     "assertions": [
-      { "type": "contains", "value": "Gebeurtenissen registreren" },
+      { "type": "contains", "value": "Meldepflicht" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "search-dutch-term",
+    "id": "search-german-term",
     "tool": "search_controls",
-    "args": { "query": "informatiebeveiliging" },
+    "args": { "query": "Informationssicherheit" },
     "assertions": [
-      { "type": "contains", "value": "bio2" },
+      { "type": "contains", "value": "bsi-grundschutz" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "search-english-monitoring",
+    "id": "search-english-security",
     "tool": "search_controls",
-    "args": { "query": "monitoring" },
+    "args": { "query": "information security" },
     "assertions": [
-      { "type": "contains", "value": "bio2" },
+      { "type": "contains", "value": "bsi-grundschutz" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "iso-mapping-5-1",
+    "id": "iso-mapping-a-5-1",
     "tool": "get_iso_mapping",
-    "args": { "iso_control": "5.1" },
+    "args": { "iso_control": "A.5.1" },
     "assertions": [
-      { "type": "contains", "value": "bio2" },
+      { "type": "contains", "value": "bsi-grundschutz" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "sector-healthcare",
+    "id": "sector-energy",
     "tool": "search_by_sector",
-    "args": { "sector": "healthcare" },
+    "args": { "sector": "energy" },
     "assertions": [
-      { "type": "contains", "value": "nen-7510" },
+      { "type": "contains", "value": "bsi-kritis" },
       { "type": "has_meta" }
     ]
   },
@@ -67,36 +67,36 @@
     "tool": "list_frameworks",
     "args": {},
     "assertions": [
-      { "type": "contains", "value": "bio2" },
-      { "type": "contains", "value": "nen-7510" },
+      { "type": "contains", "value": "bsi-grundschutz" },
+      { "type": "contains", "value": "bsi-c5" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "list-bio2-controls",
+    "id": "list-grundschutz-controls",
     "tool": "list_controls",
-    "args": { "framework_id": "bio2" },
+    "args": { "framework_id": "bsi-grundschutz" },
     "assertions": [
-      { "type": "contains", "value": "5.01.01" },
+      { "type": "contains", "value": "ISMS.1.A1" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "get-framework-bio2",
+    "id": "get-framework-grundschutz",
     "tool": "get_framework",
-    "args": { "framework_id": "bio2" },
+    "args": { "framework_id": "bsi-grundschutz" },
     "assertions": [
-      { "type": "contains", "value": "BIO" },
+      { "type": "contains", "value": "Grundschutz" },
       { "type": "has_meta" }
     ]
   },
   {
-    "id": "compare-bio2-dnb",
+    "id": "compare-grundschutz-c5",
     "tool": "compare_controls",
-    "args": { "query": "informatiebeveiliging", "framework_ids": ["bio2", "dnb-gpib-2023"] },
+    "args": { "query": "Informationssicherheit", "framework_ids": ["bsi-grundschutz", "bsi-c5"] },
     "assertions": [
-      { "type": "contains", "value": "bio2" },
-      { "type": "contains", "value": "dnb-gpib-2023" },
+      { "type": "contains", "value": "bsi-grundschutz" },
+      { "type": "contains", "value": "bsi-c5" },
       { "type": "has_meta" }
     ]
   },
@@ -112,7 +112,7 @@
   {
     "id": "negative-unknown-control",
     "tool": "get_control",
-    "args": { "control_id": "bio2:999.999" },
+    "args": { "control_id": "bsi-grundschutz:ZZZ.99.A99" },
     "assertions": [
       { "type": "is_error" },
       { "type": "error_type", "value": "NO_MATCH" },
@@ -144,7 +144,7 @@
     "tool": "about",
     "args": {},
     "assertions": [
-      { "type": "contains", "value": "Dutch Standards MCP" },
+      { "type": "contains", "value": "German Standards MCP" },
       { "type": "has_meta" }
     ]
   },

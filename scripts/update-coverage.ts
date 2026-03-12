@@ -26,18 +26,15 @@ const SOURCES_YML = join(PROJECT_ROOT, 'sources.yml');
 
 // Map from framework DB id -> source id used in coverage.json
 const FRAMEWORK_TO_SOURCE: Record<string, string> = {
-  'bio2': 'bio2',
-  'dnb-gpib-2023': 'dnb-gpib',
-  'nen-7510-2017': 'nen-7510',
-  'nen-7512-2022': 'nen-7512',
-  'nen-7513-2023': 'nen-7513',
-  'ncsc-web-2023': 'ncsc-web',
-  'digid-3.0': 'digid',
-  'ncsc-tls-2.1': 'ncsc-tls',
-  'logius-api': 'logius-api',
+  'bsi-grundschutz': 'bsi-grundschutz',
+  'bsi-c5': 'bsi-c5',
+  'bsi-tr': 'bsi-tr',
+  'bsi-kritis': 'bsi-kritis',
+  'grundschutz-bund': 'grundschutz-bund',
+  'bfdi-tom': 'bfdi-tom',
 };
 
-// Canonical source metadata — derived from sources.yml
+// Canonical source metadata -- derived from sources.yml
 interface SourceMeta {
   id: string;
   name: string;
@@ -55,7 +52,7 @@ function parseSourcesYml(content: string): SourceMeta[] {
 
   for (const block of blocks) {
     const nameMatch = block.match(/^\s*-?\s*name:\s*"([^"]+)"/m);
-    const freqMatch = block.match(/refresh_frequency:\s*"([^"]+)"/m);
+    const freqMatch = block.match(/update_frequency:\s*"([^"]+)"/m);
     const typeMatch = block.match(/source_type:\s*"?([^\s"]+)"?/m);
     if (!nameMatch) continue;
 
@@ -65,25 +62,12 @@ function parseSourcesYml(content: string): SourceMeta[] {
 
     // Determine source id from name
     let id = 'unknown';
-    if (fullName.includes('BIO2')) id = 'bio2';
-    else if (fullName.includes('DNB')) id = 'dnb-gpib';
-    // NEN 7510/7512/7513 are a single entry in sources.yml covering all three
-    else if (fullName.includes('NEN 7510') || fullName.includes('NEN 7512') || fullName.includes('NEN 7513')) {
-      // Emit separate entries for each NEN standard
-      const nens = [
-        { id: 'nen-7510', nameSuffix: 'NEN 7510:2017' },
-        { id: 'nen-7512', nameSuffix: 'NEN 7512:2022' },
-        { id: 'nen-7513', nameSuffix: 'NEN 7513:2023' },
-      ];
-      for (const nen of nens) {
-        sources.push({ id: nen.id, name: nen.nameSuffix, update_frequency: freq, source_type: srcType });
-      }
-      continue;
-    }
-    else if (fullName.includes('Web Application') || fullName.includes('Web App')) id = 'ncsc-web';
-    else if (fullName.includes('DigiD')) id = 'digid';
-    else if (fullName.includes('TLS')) id = 'ncsc-tls';
-    else if (fullName.includes('Logius') || fullName.includes('API Design Rules')) id = 'logius-api';
+    if (fullName.includes('IT-Grundschutz Kompendium')) id = 'bsi-grundschutz';
+    else if (fullName.includes('C5')) id = 'bsi-c5';
+    else if (fullName.includes('Technische Richtlinien')) id = 'bsi-tr';
+    else if (fullName.includes('KRITIS')) id = 'bsi-kritis';
+    else if (fullName.includes('Bundesbehoerden') || fullName.includes('Profil')) id = 'grundschutz-bund';
+    else if (fullName.includes('BfDI') || fullName.includes('TOM')) id = 'bfdi-tom';
 
     sources.push({ id, name: fullName, update_frequency: freq, source_type: srcType });
   }
@@ -129,8 +113,8 @@ function getLastChecked(extractedData: {
 }
 
 async function main(): Promise<void> {
-  console.log('Update Coverage — Dutch Standards MCP');
-  console.log('=======================================');
+  console.log('Update Coverage -- German Standards MCP');
+  console.log('========================================');
 
   mkdirSync(DATA_DIR, { recursive: true });
 
@@ -251,7 +235,7 @@ async function main(): Promise<void> {
   const generatedAt = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
 
   const coverage = {
-    mcp_name: 'dutch-standards-mcp',
+    mcp_name: 'german-standards-mcp',
     generated_at: generatedAt,
     summary: {
       frameworks: frameworkCount,
@@ -269,13 +253,13 @@ async function main(): Promise<void> {
   console.log(`  tools: ${toolFiles.length}`);
   console.log(`  sources: ${coverageSources.length}`);
 
-  // Update COVERAGE.md — replace the "Total:" line with actual counts
+  // Update COVERAGE.md -- replace the "Total:" line with actual counts
   if (existsSync(COVERAGE_MD)) {
     let mdContent = readFileSync(COVERAGE_MD, 'utf-8');
 
     // Update the summary totals line
     const totalControls = coverageSources.reduce((sum, s) => sum + s.item_count, 0);
-    const newTotalLine = `**Total:** ${toolFiles.length} tools, ${totalControls} controls/requirements, database built from ${coverageSources.length} authoritative Dutch sources.`;
+    const newTotalLine = `**Total:** ${toolFiles.length} tools, ${totalControls} controls, database built from ${coverageSources.length} authoritative German sources.`;
     mdContent = mdContent.replace(
       /\*\*Total:\*\*[^\n]+/,
       newTotalLine

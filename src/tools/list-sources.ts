@@ -17,60 +17,52 @@ interface SourceEntry {
 
 const FALLBACK_SOURCES: SourceEntry[] = [
   {
-    id: 'BIO2',
-    authority: 'Nationaal Cyber Security Centrum (NCSC)',
-    name: 'Baseline Informatiebeveiliging Overheid 2.0',
+    id: 'BSI-Grundschutz',
+    authority: 'Bundesamt fuer Sicherheit in der Informationstechnik (BSI)',
+    name: 'IT-Grundschutz Kompendium',
     retrieval_method: 'Static download (PDF/HTML)',
-    license: 'CC BY 4.0',
-    url: 'https://bio-overheid.nl',
+    license: 'Public document',
+    url: 'https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/IT-Grundschutz-Kompendium/it-grundschutz-kompendium_node.html',
   },
   {
-    id: 'DNB',
-    authority: 'De Nederlandsche Bank (DNB)',
-    name: 'Good Practice Informatiebeveiliging',
+    id: 'BSI-C5',
+    authority: 'Bundesamt fuer Sicherheit in der Informationstechnik (BSI)',
+    name: 'Cloud Computing Compliance Criteria Catalogue (C5:2020)',
     retrieval_method: 'Static download (PDF)',
     license: 'Public document',
-    url: 'https://www.dnb.nl',
+    url: 'https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Informationen-und-Empfehlungen/Empfehlungen-nach-Angriffszielen/Cloud-Computing/Kriterienkatalog-C5/kriterienkatalog-c5_node.html',
   },
   {
-    id: 'NEN',
-    authority: 'NEN (Nederlands Normalisatie-instituut)',
-    name: 'NEN 7510 / NEN-ISO/IEC 27001',
-    retrieval_method: 'Licensed extract (public summaries)',
-    license: 'NEN license (paid standard)',
-    url: 'https://www.nen.nl',
-  },
-  {
-    id: 'NCSC-NL',
-    authority: 'Nationaal Cyber Security Centrum',
-    name: 'NCSC-NL Security Guidelines',
-    retrieval_method: 'GitHub / static download',
-    license: 'CC BY 4.0',
-    url: 'https://github.com/NCSC-NL',
-  },
-  {
-    id: 'Logius',
-    authority: 'Logius',
-    name: 'DigiD / BRP / eHerkenning security requirements',
-    retrieval_method: 'Static download (HTML/PDF)',
-    license: 'Public document',
-    url: 'https://logius.nl',
-  },
-  {
-    id: 'IND',
-    authority: 'Inspectie JenV / IND',
-    name: 'IND informatiebeveiliging requirements',
+    id: 'BSI-TR',
+    authority: 'Bundesamt fuer Sicherheit in der Informationstechnik (BSI)',
+    name: 'BSI Technische Richtlinien (TR-02102, TR-03116, TR-03107)',
     retrieval_method: 'Static download (PDF)',
     license: 'Public document',
-    url: 'https://ind.nl',
+    url: 'https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/Technische-Richtlinien/technische-richtlinien_node.html',
   },
   {
-    id: 'ENISA',
-    authority: 'European Union Agency for Cybersecurity (ENISA)',
-    name: 'ENISA Good Practices / NIS2 guidance',
+    id: 'BSI-KRITIS',
+    authority: 'Bundesamt fuer Sicherheit in der Informationstechnik (BSI)',
+    name: 'KRITIS-Anforderungen (IT-Sicherheitsgesetz 2.0)',
     retrieval_method: 'Static download (PDF/HTML)',
-    license: 'CC BY 4.0',
-    url: 'https://www.enisa.europa.eu',
+    license: 'Public document',
+    url: 'https://www.bsi.bund.de/DE/Themen/KRITIS-und-regulierte-Unternehmen/Kritische-Infrastrukturen/kritis_node.html',
+  },
+  {
+    id: 'Grundschutz-Bund',
+    authority: 'Bundesamt fuer Sicherheit in der Informationstechnik (BSI)',
+    name: 'IT-Grundschutz Profil fuer Bundesbehoerden',
+    retrieval_method: 'Static download (PDF)',
+    license: 'Public document',
+    url: 'https://www.bsi.bund.de/DE/Themen/Unternehmen-und-Organisationen/Standards-und-Zertifizierung/IT-Grundschutz/IT-Grundschutz-Profile/Profile/Bund/bund_node.html',
+  },
+  {
+    id: 'BfDI-TOM',
+    authority: 'Bundesbeauftragte fuer den Datenschutz und die Informationsfreiheit (BfDI)',
+    name: 'DSGVO Art. 32 Technisch-Organisatorische Massnahmen (TOM)',
+    retrieval_method: 'Static download (PDF/HTML)',
+    license: 'Public document',
+    url: 'https://www.bfdi.bund.de/DE/Datenschutz/datenschutz_node.html',
   },
 ];
 
@@ -80,13 +72,8 @@ export function handleListSources() {
   const sourcesPath = join(__dirname, '..', '..', 'sources.yml');
   if (existsSync(sourcesPath)) {
     try {
-      // Parse simple YAML list — avoid a YAML dependency by using basic parsing
-      // Full YAML parsing would require a dependency; for now use fallback if file exists but let it override
       const raw = readFileSync(sourcesPath, 'utf-8');
-      // If the file exists, it's used as a signal that sources were customised.
-      // A full YAML parser is not available without adding a dependency, so we
-      // use the fallback list but note it was found.
-      void raw; // file read but not parsed without yaml dep
+      void raw;
     } catch {
       // Ignore read errors — use fallback
     }
@@ -97,7 +84,7 @@ export function handleListSources() {
   lines.push('## Data Sources');
   lines.push('');
   lines.push(
-    'This MCP server aggregates Dutch and EU cybersecurity standards from the following authoritative sources:'
+    'This MCP server aggregates German cybersecurity standards from the following authoritative sources:'
   );
   lines.push('');
   lines.push('| ID | Authority | Standard / Document | Retrieval method | License |');
@@ -112,7 +99,7 @@ export function handleListSources() {
   lines.push(`**Total sources:** ${sources.length}`);
   lines.push('');
   lines.push(
-    '> All data is extracted from public or licensed authoritative documents. ' +
+    '> All data is extracted from public authoritative documents published by BSI and BfDI. ' +
     'This tool is a reference aid — verify critical compliance decisions against the originals.'
   );
 

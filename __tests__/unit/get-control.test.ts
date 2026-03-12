@@ -3,42 +3,21 @@ import { describe, it, expect } from 'vitest';
 import { handleGetControl } from '../../src/tools/get-control.js';
 
 describe('handleGetControl', () => {
-  it('returns full control detail for bio2:5.01.01', () => {
-    const result = handleGetControl({ control_id: 'bio2:5.01.01' });
-
+  it('returns full control detail for bsi-grundschutz:ISMS.1.A1', () => {
+    const result = handleGetControl({ control_id: 'bsi-grundschutz:ISMS.1.A1' });
     expect(result.isError).toBeFalsy();
     expect(result._meta).toBeDefined();
-
     const text = result.content[0].text;
-
-    // Heading: control number
-    expect(text).toContain('5.01.01');
-
-    // English title present
-    expect(text).toContain('Policies for information security');
-
-    // Framework name
-    expect(text).toContain('Baseline Informatiebeveiliging Overheid');
-
-    // Category
-    expect(text).toContain('Organizational controls');
-
-    // Level
-    expect(text).toContain('Basishygiëne');
-
-    // ISO mapping
-    expect(text).toContain('5.1');
-
-    // Dutch description present
-    expect(text).toContain('informatiebeveiliging');
-
-    // Source URL
-    expect(text).toContain('minbzk.github.io');
+    expect(text).toContain('ISMS.1.A1');
+    expect(text).toContain('Informationssicherheit');
+    expect(text).toContain('IT-Grundschutz');
+    expect(text).toContain('ISMS');
+    expect(text).toContain('Basis');
+    expect(text).toContain('A.5.1');
   });
 
-  it('returns NO_MATCH for bio2:999.999', () => {
-    const result = handleGetControl({ control_id: 'bio2:999.999' });
-
+  it('returns NO_MATCH for bsi-grundschutz:ZZZ.99.A99', () => {
+    const result = handleGetControl({ control_id: 'bsi-grundschutz:ZZZ.99.A99' });
     expect(result.isError).toBe(true);
     expect(result._error_type).toBe('NO_MATCH');
     expect(result._meta).toBeDefined();
@@ -47,7 +26,6 @@ describe('handleGetControl', () => {
   it('returns INVALID_INPUT for missing control_id', () => {
     // @ts-expect-error -- intentional missing arg for test
     const result = handleGetControl({});
-
     expect(result.isError).toBe(true);
     expect(result._error_type).toBe('INVALID_INPUT');
     expect(result._meta).toBeDefined();

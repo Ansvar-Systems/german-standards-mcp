@@ -28,8 +28,9 @@ export function handleAbout() {
   lines.push('### About');
   lines.push('');
   lines.push(
-    'This MCP server provides structured access to Dutch cybersecurity and information security standards, ' +
-    'including BIO2, NEN 7510, NEN-ISO/IEC 27001, DNB Good Practice, NCSC-NL guidelines, and Logius frameworks.'
+    'This MCP server provides structured access to German cybersecurity and information security standards, ' +
+    'including BSI IT-Grundschutz Kompendium, BSI C5 Cloud Criteria Catalogue, BSI Technical Guidelines (TR-02102, TR-03116, TR-03107), ' +
+    'KRITIS requirements (IT-Sicherheitsgesetz 2.0), IT-Grundschutz Profil fuer Bundesbehoerden, and BfDI technical-organizational measures (TOM) for GDPR Art. 32.'
   );
   lines.push('');
   lines.push('Part of the **[Ansvar MCP Network](https://ansvar.eu)** — specialist MCP servers for compliance and security intelligence.');

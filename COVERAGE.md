@@ -1,8 +1,8 @@
-# Coverage — Dutch Standards MCP
+# Coverage -- German Standards MCP
 
 > Last verified: 2026-03-12 | Database version: 0.1.0
 
-This document declares exactly what data the Dutch Standards MCP contains, what it does not contain, and the limitations of each source. It is the contract with users.
+This document declares exactly what data the German Standards MCP contains, what it does not contain, and the limitations of each source. It is the contract with users.
 
 ---
 
@@ -10,19 +10,22 @@ This document declares exactly what data the Dutch Standards MCP contains, what 
 
 | Source | Authority | Items | Version / Date | Completeness | Refresh |
 |--------|-----------|-------|----------------|-------------|---------|
-| BIO2 (Baseline Informatiebeveiliging Overheid) | CIP/BZK | ~93 controls | 2.0 (2024-01-01) | Full | Annual |
-| DNB Good Practice Informatiebeveiliging 2023 | De Nederlandsche Bank | ~58 controls | 2023 | Full | Annual |
-| NEN 7510:2017 / NEN 7512:2022 / NEN 7513:2023 | NEN | ~200 requirements | 7510:2017, 7512:2022, 7513:2023 | Partial (see note) | 5-year cycle |
-| NCSC-NL ICT Security Guidelines for Web Applications | NCSC-NL | ~200 requirements | 2023 | Full | Annual |
-| DigiD ICT Security Assessment Normenkader 3.0 | Logius | 21 norms | 3.0 (2023) | Full | Annual |
-| NCSC-NL Security Guidelines for TLS 2.1 | NCSC-NL | ~50 recommendations | 2.1 (2021) | Full | Annual |
-| Logius NLGov REST API Design Rules | Logius | ~80 rules | 2.0 (2024-01-01) | Full | Monthly |
+| BSI IT-Grundschutz Kompendium | BSI | 58 controls | Edition 2023 (2023-02-01) | Partial | Annual |
+| BSI C5 Cloud Computing Compliance Criteria Catalogue | BSI | 46 controls | C5:2020 | Partial | Annual |
+| BSI Technische Richtlinien | BSI | 13 controls | Various (2023) | Partial | Annual |
+| KRITIS Requirements (IT-SiG 2.0) | BSI | 15 controls | IT-SiG 2.0 (2021-05-28) | Full | Annual |
+| IT-Grundschutz Profil Bundesbehoerden | BSI | 15 controls | 2023 | Partial | Annual |
+| BfDI Technisch-Organisatorische Massnahmen | BfDI | 20 controls | 2023 | Full | Annual |
 
-**Total:** 11 tools, 543 controls/requirements, database built from 9 authoritative Dutch sources.
+**Total:** 11 tools, 167 controls, database built from 6 authoritative German sources.
 
-### NEN 7510 / 7512 / 7513 Coverage Note
+### BSI IT-Grundschutz Coverage Note
 
-NEN standards are paid publications. The database contains control identifiers, titles, and category structures extracted from the publicly available previews and summaries on NEN Connect. Full normative text (detailed requirements, measurement criteria) is not included because it is subject to NEN's commercial license. Organizations that need the full text must obtain a NEN license directly.
+The full IT-Grundschutz Kompendium contains approximately 1,500 requirements across all Bausteine. This database includes 58 key requirements from the most important process and system layer Bausteine (ISMS, ORP, CON, OPS, DER, APP, SYS, NET). Full normative text is copyright BSI. Reference data (control identifiers, titles, requirement descriptions) is extracted from publicly available BSI publications.
+
+### BSI C5 Coverage Note
+
+The full C5:2020 catalogue contains 121 controls. This database includes 46 key controls covering all 17 domains. The full catalogue text is copyright BSI.
 
 ---
 
@@ -30,30 +33,29 @@ NEN standards are paid publications. The database contains control identifiers, 
 
 | Gap | Reason | Planned? |
 |-----|--------|----------|
-| TIBER-NL (Threat Intelligence Based Ethical Red-Teaming) | DNB framework for financial sector red-team testing — methodology document, not a control catalog | No |
-| VIR-BI (Voorschrift Informatiebeveiliging Rijksdienst Bijzondere Informatie) | Covers classified information handling (state secrets) — not publicly available | No |
-| ENSIA (Eenduidige Normatiek Single Information Audit) | Audit framework for municipalities, not a control standard itself | No |
-| Cyberbeveiligingswet (NIS2 implementation) | Dutch NIS2 transposition law — not yet in force as of database build date (2026-03-12) | Yes — planned once law enters force |
-| Wbni (Wet beveiliging netwerk- en informatiesystemen) | The predecessor NIS1 transposition — superseded by NIS2 implementation | No |
-| WDO (Wet digitale overheid) | Dutch Digital Government Act — sets access and identity requirements, not a security control framework | No |
-| BRP (Basisregistratie Personen) security requirements | Logius BRP requirements — separate from DigiD Normenkader | Yes — v0.2 |
-| eHerkenning security requirements | Logius eHerkenning requirements — separate procurement process | Yes — v0.2 |
-| NCTV sector security standards (vital infrastructure) | Ministry of Justice sector-specific standards — not publicly consolidated | No |
-| ISO/IEC 27001:2022 (full standard) | Commercial ISO standard — reference mappings included via `iso_mapping` field, full text excluded | No |
-| NEN-EN-ISO/IEC 27001:2023 (Dutch adoption) | Dutch NEN adoption of ISO 27001:2023 — commercial license | No |
-| CIS Controls v8 | International framework — out of scope for Dutch-specific MCP | No |
+| Full BSI IT-Grundschutz Kompendium (~1,500 requirements) | Partial extract -- key Bausteine included | Yes -- v0.2 expansion |
+| Full BSI C5 catalogue (~121 controls) | Partial extract -- key controls from all 17 domains | Yes -- v0.2 expansion |
+| NIS2UmsuCG (NIS2 Umsetzungs- und Cybersicherheitsstaerkungsgesetz) | German NIS2 transposition -- not yet fully in force | Yes -- planned once law enters force |
+| BSIG full text (BSI-Gesetz) | Covered indirectly via KRITIS requirements | No |
+| IT-Grundschutz Kompendium full normative text | Copyright BSI -- reference data extracted | No |
+| ISO/IEC 27001:2022 full text | Commercial ISO standard -- reference mappings included via `iso_mapping` field, full text excluded | No |
+| BSI TR-03161 (Mobile Application Security) | Not yet ingested | Yes -- v0.2 |
+| TISAX (automotive) | VDA/ENX framework -- separate procurement | No |
+| BSI SiSyPHuS Win10 | Specific Windows 10 security analysis -- methodology, not a control catalog | No |
+| Landesdatenschutz state DPA guidance | 16 state DPAs, not consolidated | No |
+| BaFin BAIT/VAIT/KAIT/ZAIT | Financial sector IT requirements -- planned for separate MCP | No |
 
 ---
 
 ## Limitations
 
-- **NEN full text excluded.** NEN 7510, 7512, and 7513 are commercial standards. Only control identifiers, titles, and category structures are included. Use `get_control` to retrieve what's available; implementation guidance fields may be empty for NEN controls.
-- **ISO mapping is partial.** Not all controls have `iso_mapping` populated. BIO2 has the most complete ISO 27002:2022 mapping; other frameworks have varying coverage. `get_iso_mapping` only returns controls with an explicit mapping.
+- **BSI Grundschutz is a partial extract.** The database includes 58 of approximately 1,500 requirements. It covers the most frequently referenced Bausteine but is not a complete implementation of the Kompendium. Use `list_controls({ framework_id: "bsi-grundschutz" })` to see exactly what is available.
+- **ISO mapping is partial.** Not all controls have `iso_mapping` populated. BSI Grundschutz has the most complete ISO 27001:2022 mapping; other frameworks have varying coverage. `get_iso_mapping` only returns controls with an explicit mapping.
 - **Snapshot data, not live.** The database is a point-in-time extract. Standards may be updated between database rebuilds. The `check_data_freshness` tool reports the last-fetched date for each source.
-- **Dutch as primary language.** All controls have Dutch titles and descriptions. English translations are available for BIO2, DNB, NCSC-NL TLS, and Logius API Design Rules. NEN 7510/7512/7513 and DigiD Normenkader are Dutch-only in this database.
-- **No case law or guidance letters.** The database contains normative controls only, not interpretive guidance, enforcement decisions, or sector supervisor letters.
+- **German as primary language.** All controls have German titles and descriptions (`title_nl`, `description_nl` columns). English translations are provided where available but may not be present for all controls.
+- **No case law or enforcement decisions.** The database contains normative controls only, not BfDI decisions, BSI warnings, or court rulings.
 - **Sector metadata may be incomplete.** Frameworks are tagged with `scope_sectors` values during ingestion. If a framework's sector coverage is broader than what's tagged, `search_by_sector` may not surface it.
-- **Not a legal opinion.** Compliance with these standards is not verified by this tool. The tool provides structured access to control text — whether a specific system or process meets a control is a judgment that requires qualified assessment.
+- **Not a legal opinion.** Compliance with these standards is not verified by this tool. The tool provides structured access to control text -- whether a specific system or process meets a control is a judgment that requires qualified assessment.
 
 ---
 
@@ -61,61 +63,56 @@ NEN standards are paid publications. The database contains control identifiers, 
 
 | Source | Refresh Schedule | Last Refresh | Next Expected |
 |--------|-----------------|-------------|---------------|
-| BIO2 | Annual | 2026-03-12 | 2027-01-01 |
-| DNB Good Practice IB | Annual | 2026-03-12 | 2027-01-01 |
-| NEN 7510/7512/7513 | 5-year cycle | 2026-03-12 | 2028-01-01 |
-| NCSC-NL Web App Guidelines | Annual | 2026-03-12 | 2027-01-01 |
-| DigiD Normenkader | Annual | 2026-03-12 | 2027-01-01 |
-| NCSC-NL TLS Guidelines | Annual | 2026-03-12 | 2027-01-01 |
-| Logius API Design Rules | Monthly | 2026-03-12 | 2026-04-12 |
+| BSI IT-Grundschutz | Annual | 2026-03-12 | 2027-02-01 |
+| BSI C5 | Annual | 2026-03-12 | 2027-01-01 |
+| BSI Technische Richtlinien | Annual | 2026-03-12 | 2027-01-01 |
+| KRITIS (IT-SiG 2.0) | Annual | 2026-03-12 | 2027-01-01 |
+| Grundschutz Bund | Annual | 2026-03-12 | 2027-01-01 |
+| BfDI TOM | Annual | 2026-03-12 | 2027-01-01 |
 
 To check current freshness status programmatically, call the `check_data_freshness` tool.
 
-The ingestion pipeline (`ingest.yml`) runs on the most frequent source schedule. The `check-updates.yml` workflow runs daily and creates a GitHub issue if any source is overdue.
+The ingestion pipeline (`ingest.yml`) runs on the annual refresh schedule. The `check-updates.yml` workflow runs daily and creates a GitHub issue if any source is overdue.
 
 ---
 
 ## Regulatory Mapping
 
-This table maps Dutch regulations and laws to the frameworks in this MCP that implement or operationalize them.
+This table maps German regulations and laws to the frameworks in this MCP that implement or operationalize them.
 
 | Regulation / Law | Relevant Frameworks | Notes |
 |-----------------|---------------------|-------|
-| Wet beveiliging netwerk- en informatiesystemen (Wbni) | BIO2, NEN 7510 | Wbni applies to operators of essential services and digital service providers |
-| Algemene Verordening Gegevensbescherming (AVG / GDPR) | BIO2, NEN 7510, NEN 7512 | Security of personal data — Article 32 technical measures |
-| Wet op de geneeskundige behandelingsovereenkomst (WGBO) | NEN 7510, NEN 7512, NEN 7513 | Electronic health records and patient data security |
-| Baseline Informatiebeveiliging Overheid (BIO2) | BIO2 | Directly mandatory for all Dutch government bodies (Rijksoverheid, provinces, municipalities, water boards) |
-| DigiD access requirements | DigiD Normenkader | Mandatory for all organizations connecting to DigiD |
-| Government REST API requirements | Logius API Design Rules | Mandatory for Dutch government REST APIs |
-| DNB supervisory requirements (financial sector) | DNB Good Practice IB | Applied by DNB in ongoing supervision of banks, insurers, payment institutions |
+| IT-Sicherheitsgesetz 2.0 (IT-SiG 2.0) | bsi-kritis | Mandatory for KRITIS operators -- reporting obligations, SzA, ISMS |
+| DSGVO / GDPR Art. 32 | bfdi-tom | Technical and organizational measures for personal data protection |
+| BSI-Gesetz (BSIG) | bsi-grundschutz, bsi-kritis | BSI authority and KRITIS operator obligations |
+| IT-Grundschutz (UP Bund) | bsi-grundschutz, grundschutz-bund | Mandatory for federal agencies (Bundesbehoerden) |
+| Cloud usage in government | bsi-c5 | C5 attestation required for government cloud procurement |
+| Technische Richtlinien | bsi-tr | BSI TR requirements for crypto, TLS, electronic identity |
+| NIS2UmsuCG (future) | bsi-kritis (extends) | Will expand KRITIS categories and obligations |
 
 ---
 
-## Sector-Specific Gaps
+## Sector-Specific Coverage
 
-### Government (Rijksoverheid, provinces, municipalities)
+### Government (Bundesbehoerden)
 
-- **Included:** BIO2 (full), Logius API Design Rules, DigiD Normenkader
-- **Gap:** ENSIA self-assessment framework for municipalities not included
-- **Gap:** VIR-BI (classified information) not included — out of scope (state secrets regime)
+- **Included:** bsi-grundschutz (full ISMS + technical), grundschutz-bund (federal profile), bsi-tr (crypto/identity)
+- **Gap:** Full Kompendium -- only key Bausteine included
+- **Gap:** State-level (Laender) IT security requirements not included
 
-### Healthcare
+### Critical Infrastructure (KRITIS -- Energy, Water, Healthcare, Transport, Telecom, Finance)
 
-- **Included:** NEN 7510, NEN 7512, NEN 7513 (control identifiers and titles)
-- **Gap:** Full NEN normative text excluded (commercial license)
-- **Gap:** NICTIZ implementation guidelines not included
-- **Gap:** IGJ (healthcare inspectorate) sector-specific security requirements not included
+- **Included:** bsi-kritis (15 core requirements including SzA, Meldepflicht)
+- **Gap:** Sector-specific branchenspezifische Sicherheitsstandards (B3S) not included
+- **Gap:** KRITIS-DachG (physical security) not included
 
-### Financial Services
+### Cloud Service Providers
 
-- **Included:** DNB Good Practice Informatiebeveiliging 2023
-- **Gap:** AFM cybersecurity guidance not included
-- **Gap:** TIBER-NL red-team methodology not included
-- **Gap:** EBA ICT Risk guidelines (EU-level) not included — see EU Regulations MCP
+- **Included:** bsi-c5 (46 controls across all 17 domains)
+- **Gap:** Full C5 catalogue (~121 controls) -- key controls included, not exhaustive
 
-### Critical Infrastructure (Energy, Water, Telecom, Transport)
+### Data Protection
 
-- **Included:** BIO2 (for government-owned infrastructure)
-- **Gap:** NCTV sector security standards not included (not publicly consolidated)
-- **Gap:** NEN-EN 50600 (data center standards) not included
-- **Gap:** Sector-specific Wbni implementation guides not included
+- **Included:** bfdi-tom (20 TOM measures covering all eight traditional categories)
+- **Gap:** State DPA (Landesdatenschutz) specific guidance not included
+- **Gap:** BfDI enforcement decisions and guidance letters not included

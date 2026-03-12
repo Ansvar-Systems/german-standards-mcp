@@ -12,7 +12,8 @@ const ALLOWED_SECTORS = new Set([
   'transport',
   'water',
   'digital_infrastructure',
-  'education',
+  'cloud',
+  'all',
 ]);
 
 interface FrameworkRow {
